@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.mdw.scrollertest.ScrollerLayout
+<com.example.mdw.scrollertest.VerticalScrollerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
 
     <Button
-        android:gravity="center"
+
         android:text="this is first child view"
-        android:layout_width="match_parent"
         android:onClick="show"
-        android:layout_height="100dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <TextView
+        android:textColor="#000"
         android:gravity="center"
         android:background="#ff0"
         android:text="this is second child view"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="match_parent" />
     <TextView
         android:gravity="center"
         android:background="#0ff"
         android:text="this is third child view"
         android:textAllCaps="false"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="match_parent" />
 
-
-</com.example.mdw.scrollertest.ScrollerLayout>
+    </com.example.mdw.scrollertest.VerticalScrollerLayout >
