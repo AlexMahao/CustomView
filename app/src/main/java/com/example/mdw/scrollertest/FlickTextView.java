@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * 条形进度 ，音乐播放器节奏试图
+ *  闪闪发光的字体
  * Created by Alex_Mahao on 2016/3/14.
  */
 public class FlickTextView extends TextView {

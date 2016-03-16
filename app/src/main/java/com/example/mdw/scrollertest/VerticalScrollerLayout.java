@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Scroller;
 
 /**
- * Created by mdw on 2016/3/15.
+ * 垂直滚动条
+ * Created by Alex_MaHao on 2016/3/15.
  */
 public class VerticalScrollerLayout extends ViewGroup {
 
@@ -21,8 +22,14 @@ public class VerticalScrollerLayout extends ViewGroup {
      */
     private int mScreenHeight;
 
+    /**
+     * 手指上次触摸事件的y轴位置
+     */
     private int mLastY;
 
+    /**
+     * 点击时y轴的偏移量
+     */
     private int mStart;
 
     /**
@@ -31,17 +38,25 @@ public class VerticalScrollerLayout extends ViewGroup {
     private Scroller mScroller;
 
     /**
-     * 最小移动距离
+     * 最小移动距离判定
      */
     private int mTouchSlop;
 
-
+    /**
+     * 滑动结束的偏移量
+     */
     private int mEnd;
 
+    /**
+     * 初始按下y轴坐标
+     */
     private int mDownStartX;
 
-    private int mViewHeight;
+    /**
+     * 记录当前y轴坐标
+     */
     private int y;
+
 
     public VerticalScrollerLayout(Context context) {
         super(context, null);
@@ -71,23 +86,17 @@ public class VerticalScrollerLayout extends ViewGroup {
 
         for (int i = 0; i < count; i++) {
             View childView = getChildAt(i);
-            // 大坑
-            int childHeight = MeasureSpec.makeMeasureSpec(mScreenHeight,MeasureSpec.EXACTLY);
+            // 手动获取childView的高度，此为大坑
+           int childHeight = MeasureSpec.makeMeasureSpec(mScreenHeight,MeasureSpec.EXACTLY);
             measureChild(childView, widthMeasureSpec, childHeight);
         }
 
-        //mViewHeight = getChildAt(0).getMeasuredHeight();
-        //设置ViewGroup的高度
 
-       // Log.i("info", "onMeasure:"+getMeasuredHeight());
-
-       // setMeasuredDimension(widthMeasureSpec,heightMeasureSpec);
+       Log.i("info", "onMeasure:"+getMeasuredHeight());
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
-
 
         int childCount = getChildCount();
 
@@ -101,11 +110,12 @@ public class VerticalScrollerLayout extends ViewGroup {
             if (child.getVisibility() != View.GONE) {
                 child.layout(l, i * mScreenHeight, r, (i + 1) * mScreenHeight);
             }
-           // Log.i("info", "childViewHeight:" + i + "````" + getChildAt(i).getMeasuredHeight());
+           Log.i("info", "childViewHeight:" + i + "````" + getChildAt(i).getMeasuredHeight());
         }
-       // Log.i("info", "onLayout" + "``" + changed);
+       //Log.i("info", "onLayout" + "``" + changed);
 
     }
+
 
    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -126,6 +136,7 @@ public class VerticalScrollerLayout extends ViewGroup {
         }
         return super.onInterceptTouchEvent(ev);
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -157,8 +168,9 @@ public class VerticalScrollerLayout extends ViewGroup {
                 mLastY = y;
                 break;
             case MotionEvent.ACTION_UP:
-                mEnd = getScrollY();
+                mEnd = getScrollY();//偏移量，初始y-移动后的y
                 int dScrollY = mEnd - mStart;
+               // Log.i("info",dScrollY);
                 if (dScrollY > 0) {
                     if (dScrollY < mScreenHeight / 3) {
                         mScroller.startScroll(0, getScrollY(), 0, -dScrollY);
@@ -182,8 +194,11 @@ public class VerticalScrollerLayout extends ViewGroup {
     @Override
     public void computeScroll() {
         super.computeScroll();
+        //判断scroller滚动是否完成
         if (mScroller.computeScrollOffset()) {
+            // 这里调用View的scrollTo()完成实际的滚动
             scrollTo(0, mScroller.getCurrY());
+            //刷新试图
             postInvalidate();
         }
     }

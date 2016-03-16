@@ -8,7 +8,8 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * Created by mdw on 2016/3/14.
+ * 带有边框的文字
+ * Created by Alex_Mahao on 2016/3/14.
  */
 public class BorderTextView  extends TextView{
 

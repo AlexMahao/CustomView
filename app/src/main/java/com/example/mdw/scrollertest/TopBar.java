@@ -13,7 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * Created by mdw on 2016/3/14.
+ * 自定义标题栏
+ * Created by Alex_MaHao on 2016/3/14.
  */
 public class TopBar extends RelativeLayout {
 

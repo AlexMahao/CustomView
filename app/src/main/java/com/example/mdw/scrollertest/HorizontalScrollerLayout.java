@@ -11,12 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Scroller;
 
 /**
- *
- *
- *
- * Created by mdw on 2016/3/8.
+ *  水平滚动条，类似ViewPager
+ * Created by Alext_MaHao on 2016/3/8.
  */
-public class ScrollerLayout extends ViewGroup {
+public class HorizontalScrollerLayout extends ViewGroup {
 
     //用于完成滚动操作的实例
     private Scroller mScroller;
@@ -49,7 +47,7 @@ public class ScrollerLayout extends ViewGroup {
      */
     private float mXMove;
 
-    public ScrollerLayout(Context context, AttributeSet attrs) {
+    public HorizontalScrollerLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         //第一步，创建Scroller的实例
